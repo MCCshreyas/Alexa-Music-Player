@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Alexa music player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h3>Alexa Music player</h3>
+    </header>
+
+    <h3 class="help">Press the associated key to play music</h3>
+
+    <div class="keys">
+        <div data-key="65" class="key">
+            <img src="./Images/something.jpg" />
+            <kbd>A</kbd>
+            <span class="sound">Something just like this</span>
+        </div>
+        <div data-key="83" class="key">
+            <img src="./Images/being sorry.jpg" />
+            <kbd>S</kbd>
+            <span class="sound">Tired of being sorry</span>
+        </div>
+        <div data-key="68" class="key">
+            <img src="./Images/hey mama.jpg" />
+            <kbd>D</kbd>
+            <span class="sound">Feat. David Gutta Hey mama
+
+            </span>
+        </div>
+        <div data-key="70" class="key">
+            <img src="./Images/radioactive.jpg" />
+            <kbd>F</kbd>
+            <span class="sound">Imagine radioactive </span>
+        </div>
+        <div data-key="72" class="key">
+            <img src="./Images/escape.jpg" />
+            <kbd>H</kbd>
+            <span class="sound">Escape</span>
+        </div>
+        <div data-key="74" class="key">
+            <img src="./Images/titanium.jpg" />
+            <kbd>J</kbd>
+            <span class="sound">Titanium</span>
+        </div>
+        <div data-key="75" class="key">
+            <img src="./Images/addicted.jpg" />
+            <kbd>K</kbd>
+            <span class="sound">Addicated</span>
+        </div>
+        <div data-key="76" class="key">
+            <img src="./Images/mi gente.jpg" />
+            <kbd>L</kbd>
+            <span class="sound">Mi Gente</span>
+        </div>
+    </div>
+
+    <!--Audio files-->
+	<!--Add path to audio files to src attribute -->
+	<!-- Ex- <audio data-key=65 src="/path/to/audiofile.mp3"></audio> -->
+	
+	<!-- A -->
+    <audio data-key="65" src=""></audio>
+	
+	<!-- S -->
+    <audio data-key="83" src=""></audio>
+	
+	<!-- D -->
+    <audio data-key="68" src=""></audio>
+	
+	<!-- F -->
+    <audio data-key="70" src=""></audio>
+	
+	<!-- H -->
+    <audio data-key="72" src=""></audio>
+	
+	<!-- J -->
+    <audio data-key="74" src=""></audio>
+	
+	<!-- K -->
+    <audio data-key="75" src=""></audio>
+	
+	<!-- L -->
+    <audio data-key="76" src=""></audio>
+
+    <script>
+
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            e.target.classList.remove('playing');
+        }
+        var allAudios = document.querySelectorAll('audio');
+
+        function stopAllAudio() {
+            allAudios.forEach(function (audio) {
+                audio.pause();
+            });
+        }
+
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            if (!audio) 
+            return;
+            key.classList.add('playing');
+            stopAllAudio();
+            audio.play();
+
+        }
+
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+        window.addEventListener('keydown', playSound);
+    </script>
+</body>
+</html>
